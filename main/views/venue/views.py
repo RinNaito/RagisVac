@@ -13,27 +13,25 @@ app_name = 'main'
 
 
 # 一覧画面
-class OperatorListView(LoginRequiredMixin, generic.ListView):
+class VenueListView(LoginRequiredMixin, generic.ListView):
     model = User
-    template_name = "main/operator/operator_list.html"
+    template_name = "main/venue/venue_list.html"
     object_list = User.objects.order_by('username')
     success_url = reverse_lazy('home')
 
 
 # 登録画面
 # まっさらな状態
-class OperatorCreateView(CreateView):
+class VenueCreateView(CreateView):
     model = User
     form_class = MyUserCreationForm
-    template_name = "main/operator/operator_form.html"
-    success_url = reverse_lazy('main:operator_list')
+    template_name = "main/venue/venue_form.html"
+    success_url = reverse_lazy('main:venue_list')
 
 
 # 更新画面
-class OperatorUpdateView(UpdateView):
+class VenueUpdateView(UpdateView):
     model = User
     form_class = MyUserCreationForm
-    template_name = "main/operator/operator_form.html"
-    success_url = reverse_lazy('main:operator_list')
-
-
+    template_name = "main/venue/venue_form.html"
+    success_url = reverse_lazy('main:venue_list')

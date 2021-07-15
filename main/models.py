@@ -36,15 +36,14 @@ class Operator(models.Model):
 class Venue(models.Model):
     class Meta:
         verbose_name = '接種会場'
-        verbose_name_plural = '接種会場'
-        db_table = 'operator'
+        verbose_name_plural = '接種会場群'
+        db_table = 'venue'
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     hidden_flag = models.BooleanField(verbose_name='非表示フラグ', default=False, blank=True, null=True)
 
     def __str__(self):
-        return 'Operator Master id:' + str(self.id) + ', username：' + self.user.username + \
-               ', Email：' + self.user.email
+        return 'Venue Master id:' + str(self.id) + ', username：' + self.user.username
 
 
 # ユーザーモデルと1:1リレーションで同期して登録する
@@ -58,3 +57,4 @@ def create_user_operator(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_operator(sender, instance, **kwargs):
     instance.operator.save()
+
